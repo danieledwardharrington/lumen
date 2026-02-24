@@ -24,3 +24,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "Pulse Check"
 include(":app")
+include(":today")
+include(":timeline")
+include(":insights")

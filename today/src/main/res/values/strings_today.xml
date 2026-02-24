@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Mood strings -->
+    <string name="mood_great">Great</string>
+    <string name="mood_good">Good</string>
+    <string name="mood_okay">Okay</string>
+    <string name="mood_low">Low</string>
+    <string name="mood_struggling">Struggling</string>
+
+    <string name="how_feeling">How are you feeling right now?</string>
+
+    <!-- Greetings -->
+    <string name="greeting_morning">Good morning</string>
+    <string name="greeting_afternoon">Good afternoon</string>
+    <string name="greeting_evening">Good evening</string>
+
+    <string name="complete_check_in">Complete Check-In</string>
+</resources>
