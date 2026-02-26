@@ -13,11 +13,11 @@ kotlin {
 }
 
 android {
-    namespace = "com.deh.pulsecheck"
+    namespace = "com.deh.lumen"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.deh.pulsecheck"
+        applicationId = "com.deh.lumen"
         minSdk = 34
         targetSdk = 36
         versionCode = 1

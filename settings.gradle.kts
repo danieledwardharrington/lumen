@@ -22,7 +22,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Pulse Check"
+rootProject.name = "Lumen"
 include(":app")
 include(":today")
 include(":timeline")

@@ -1,4 +1,4 @@
-package com.deh.pulsecheck
+package com.deh.lumen.timeline
 
 import org.junit.Test
 

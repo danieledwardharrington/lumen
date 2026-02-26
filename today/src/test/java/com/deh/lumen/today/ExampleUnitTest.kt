@@ -1,4 +1,4 @@
-package com.deh.pulsecheck.insights
+package com.deh.lumen.today
 
 import org.junit.Test
 
