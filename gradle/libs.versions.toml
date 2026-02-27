@@ -1,6 +1,7 @@
 [versions]
 agp = "9.0.1"
 kotlin = "2.3.10"
+kotlinDateTime = "0.7.1"
 coreKtx = "1.17.0"
 junit = "4.13.2"
 junitVersion = "1.3.0"
@@ -8,7 +9,30 @@ espressoCore = "3.7.0"
 appcompat = "1.7.1"
 material = "1.13.0"
 
+google-services = "4.4.4"
+room = "2.8.4"
+firebase  = "34.9.0"
+hilt = "2.59.2"
+hiltNav = "1.3.0"
+
+composeGradlePlugin = "2.3.10"
+composeBom = "2026.02.00"
+composeActivity = "1.12.4"
+composeViewModel = "2.10.0"
+composeCoil = "3.4.0"
+composeNav = "2.9.7"
+composeAnimation = "1.10.4"
+
+coroutines = "1.10.2"
+
+timber = "5.0.1"
+
+vico = "3.0.1"
+
+billing = "8.3.0"
+
 [libraries]
+billing = { module = "com.android.billingclient:billing-ktx", version.ref = "billing" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
@@ -16,8 +40,74 @@ androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-co
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
+kotlin-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinDateTime" }
+
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase" }
+firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
+firebase-ai = { module = "com.google.firebase:firebase-ai" }
+
+compose-gradle-plugin = { module = "org.jetbrains.kotlin.plugin.compose:org.jetbrains.kotlin.plugin.compose.gradle.plugin", version.ref = "composeGradlePlugin" }
+compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeBom" }
+compose-material3 = { module = "androidx.compose.material3:material3" }
+compose-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
+compose-adaptive = { module = "androidx.compose.material3:material3-adaptive" }
+compose-ui = { module = "androidx.compose.ui:ui" }
+compose-activities = { module = "androidx.activity:activity-compose", version.ref = "composeActivity" }
+compose-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "composeViewModel" }
+compose-navigation = { module = "androidx.navigation:navigation-compose", version.ref = "composeNav" }
+compose-animation = { module = "androidx.compose.animation:animation", version.ref = "composeAnimation" }
+compose-coil = { module = "io.coil-kt.coil3:coil-compose", version.ref = "composeCoil" }
+
+hilt = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
+hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
+hilt-compose-navigation = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNav" }
+
+coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
+coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
+
+
+timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
+
+vico-compose = { group = "com.patrykandpatrick.vico", name = "compose", version.ref = "vico" }
+
+[bundles]
+compose = [
+    "compose-bom",
+    "compose-material3",
+    "compose-preview",
+    "compose-adaptive",
+    "compose-ui",
+    "compose-activities",
+    "compose-viewmodel",
+    "compose-coil",
+    "compose-navigation",
+    "compose-animation"
+]
+room = [
+    "room-compiler",
+    "room-runtime",
+    "room-ktx"
+]
+firebase = [
+    "firebase-bom",
+    "firebase-analytics",
+    "firebase-ai"
+]
+hilt = [
+    "hilt",
+    "hilt-compiler",
+    "hilt-compose-navigation"
+]
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 android-library = { id = "com.android.library", version.ref = "agp" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+google-services = { id = "com.google.gms.google-services", version.ref = "google-services" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 

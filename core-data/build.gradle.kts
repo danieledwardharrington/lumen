@@ -1,10 +1,8 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    alias(libs.plugins.android.application)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.google.services)
-    alias(libs.plugins.compose.compiler)
 }
 
 kotlin {
@@ -14,21 +12,16 @@ kotlin {
 }
 
 android {
-    namespace = "com.deh.lumen"
-    compileSdk = 36
-
-    buildFeatures {
-        compose = true
+    namespace = "com.deh.lumen.core_data"
+    compileSdk {
+        version = release(36)
     }
 
     defaultConfig {
-        applicationId = "com.deh.lumen"
         minSdk = 34
-        targetSdk = 36
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -40,18 +33,18 @@ android {
             )
         }
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
+    implementation(libs.kotlin.datetime)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    implementation(libs.bundles.room)
+    implementation(libs.bundles.hilt)
+    implementation(libs.coroutines.core)
 }
