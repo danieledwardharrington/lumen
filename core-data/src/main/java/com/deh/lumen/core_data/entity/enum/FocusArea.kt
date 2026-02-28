@@ -1,4 +1,4 @@
-package com.deh.lumen.core_data.entity
+package com.deh.lumen.core_data.entity.enum
 
 enum class FocusArea {
     WORK,

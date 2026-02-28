@@ -3,8 +3,8 @@ package com.deh.lumen.core_data.entity
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.deh.lumen.core_data.CoreDataConstants
-import com.deh.lumen.core_data.entity.FocusArea
-import com.deh.lumen.core_data.entity.UserIntention
+import com.deh.lumen.core_data.entity.enum.FocusArea
+import com.deh.lumen.core_data.entity.enum.UserIntention
 import kotlinx.datetime.DayOfWeek
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.LocalTime
@@ -16,7 +16,7 @@ import kotlin.uuid.Uuid
 
 @OptIn(ExperimentalUuidApi::class)
 @Entity(tableName = CoreDataConstants.USER_TABLE_NAME)
-data class User(
+data class UserEntity(
     @PrimaryKey
     val id: String = Uuid.Companion.random().toString(),
     val displayName: String,
