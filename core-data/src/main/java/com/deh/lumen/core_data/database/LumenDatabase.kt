@@ -1,0 +1,58 @@
+package com.deh.lumen.core_data.database
+
+import android.content.Context
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
+import com.deh.lumen.core_data.CoreDataConstants
+import com.deh.lumen.core_data.dao.CheckInDao
+import com.deh.lumen.core_data.dao.UserDao
+import com.deh.lumen.core_data.entity.CheckInEntity
+import com.deh.lumen.core_data.entity.UserEntity
+
+@Database(
+    entities = [
+        UserEntity::class,
+        CheckInEntity::class
+    ],
+    version = CoreDataConstants.DATABASE_VERSION,
+    exportSchema = true
+)
+abstract class LumenDatabase: RoomDatabase() {
+    abstract fun userDao(): UserDao
+    abstract fun checkInDao(): CheckInDao
+
+    companion object {
+
+        @Volatile
+        private var instance: LumenDatabase? = null
+
+        fun getInstance(
+            context: Context,
+            passphrase: ByteArray
+        ): LumenDatabase {
+            return instance ?: synchronized(this) {
+                instance ?: buildDatabase(context, passphrase).also {
+                    instance = it
+                }
+            }
+        }
+
+        private fun buildDatabase(
+            context: Context,
+            passphrase: ByteArray
+        ): LumenDatabase {
+            val factory = SupportFactory(passphrase)
+
+            return Room.databaseBuilder(
+                context.applicationContext,
+                LumenDatabase::class.java,
+                CoreDataConstants.DATABASE_NAME
+            )
+                .openHelperFactory(factory)
+                .addMigrations(*Migrations.ALL)
+                .fallbackToDestructiveMigrationOnDowngrade(false)
+                .build()
+        }
+    }
+}

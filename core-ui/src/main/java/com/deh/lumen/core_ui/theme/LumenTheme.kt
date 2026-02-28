@@ -61,31 +61,13 @@ private val LumenDarkColorScheme = darkColorScheme(
     outlineVariant    = LumenColor.BorderFocused,
 )
 
-// ─────────────────────────────────────────────────────────────
-// Shapes
-//
-// Derived from the --radius and --radius-sm CSS variables
-// used consistently across all mockups.
-// ─────────────────────────────────────────────────────────────
-
 val LumenShapes = Shapes(
-    // --radius-sm: 14dp — follow-up cards, settings groups,
-    // buttons, stat cards, streak card, focus tiles
     extraSmall = RoundedCornerShape(10.dp),   // input fields, answer boxes
     small      = RoundedCornerShape(14.dp),   // --radius-sm: cards, buttons, chips
     medium     = RoundedCornerShape(20.dp),   // pill chips, month tabs
     large      = RoundedCornerShape(24.dp),   // --radius: user card, insight hero, tip card
     extraLarge = RoundedCornerShape(44.dp),   // phone shell border radius (not used in app UI)
 )
-
-// ─────────────────────────────────────────────────────────────
-// Extended Colors
-//
-// Colors that don't map cleanly to Material 3 slots —
-// primarily the mood palette and gradient definitions.
-// Accessed via LocalLumenColors.current rather than
-// MaterialTheme.colorScheme.
-// ─────────────────────────────────────────────────────────────
 
 data class LumenExtendedColors(
 
@@ -147,14 +129,6 @@ private val LumenDarkExtendedColors = LumenExtendedColors(
     glowGold   = LumenColor.AccentGoldGlow,
 )
 
-// ─────────────────────────────────────────────────────────────
-// Extended Spacing
-//
-// Common spacing values derived from the mockups.
-// Provides a consistent spatial scale across the app
-// without magic numbers scattered through composables.
-// ─────────────────────────────────────────────────────────────
-
 data class LumenSpacing(
     val xs: Dp =  4.dp,
     val sm: Dp =  8.dp,
@@ -164,7 +138,7 @@ data class LumenSpacing(
     val xxl: Dp = 24.dp,
     val xxxl: Dp = 32.dp,
 
-    // Screen horizontal padding — matches phone-inner padding in mockups
+    // Screen horizontal padding
     val screenHorizontal: Dp = 24.dp,
 
     // Vertical gap between sections on a screen
@@ -181,10 +155,6 @@ data class LumenSpacing(
     val navBarHeight: Dp = 56.dp,
 )
 
-// ─────────────────────────────────────────────────────────────
-// Composition Locals
-// ─────────────────────────────────────────────────────────────
-
 val LocalLumenColors = staticCompositionLocalOf {
     LumenDarkExtendedColors
 }
@@ -193,25 +163,9 @@ val LocalLumenSpacing = staticCompositionLocalOf {
     LumenSpacing()
 }
 
-// ─────────────────────────────────────────────────────────────
-// LumenTheme
-//
-// The root composable that every screen in the app is wrapped
-// in. Provides Material 3 theming with Lumen's custom color
-// scheme, typography, and shapes, plus the extended colors
-// and spacing via CompositionLocal.
-//
-// Usage:
-//   LumenTheme {
-//       CheckInScreen()
-//   }
-// ─────────────────────────────────────────────────────────────
-
 @Composable
 fun LumenTheme(
-    // Lumen is dark-only for now. This parameter is here
-    // so the signature is future-proof if a light theme
-    // is added later without changing call sites.
+    // Lumen is dark-only for now
     darkTheme: Boolean = true,
     content: @Composable () -> Unit
 ) {
@@ -230,14 +184,6 @@ fun LumenTheme(
         )
     }
 }
-
-// ─────────────────────────────────────────────────────────────
-// Convenience accessors
-//
-// Mirrors the MaterialTheme pattern so composables can write:
-//   LumenTheme.colors.moodGreat
-//   LumenTheme.spacing.screenHorizontal
-// ─────────────────────────────────────────────────────────────
 
 object LumenTheme {
 
