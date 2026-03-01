@@ -12,7 +12,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.deh.lumen.core_data"
+    namespace = "com.deh.lumen.profile"
     compileSdk {
         version = release(36)
     }
@@ -37,17 +37,9 @@ android {
 
 dependencies {
     implementation(libs.androidx.core.ktx)
-    implementation(libs.kotlin.datetime)
-    implementation(libs.kotlinx.serialization)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
-    implementation(libs.bundles.room)
-    implementation(libs.bundles.hilt)
-    implementation(libs.coroutines.core)
-
-    implementation(libs.bundles.sqlcipher)
 }

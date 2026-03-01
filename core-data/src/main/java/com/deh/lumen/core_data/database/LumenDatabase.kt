@@ -15,6 +15,7 @@ import com.deh.lumen.core_data.dao.CheckInDao
 import com.deh.lumen.core_data.dao.UserDao
 import com.deh.lumen.core_data.entity.CheckInEntity
 import com.deh.lumen.core_data.entity.UserEntity
+import net.zetetic.database.sqlcipher.SupportOpenHelperFactory
 
 @Database(
     entities = [
@@ -55,12 +56,15 @@ abstract class LumenDatabase: RoomDatabase() {
             context: Context,
             passphrase: ByteArray
         ): LumenDatabase {
+            val factory = SupportOpenHelperFactory(passphrase)
+            passphrase.fill(0)
 
             return Room.databaseBuilder(
                 context.applicationContext,
                 LumenDatabase::class.java,
                 CoreDataConstants.DATABASE_NAME
             )
+                .openHelperFactory(factory)
                 .addMigrations(*Migrations.ALL)
                 .fallbackToDestructiveMigrationOnDowngrade(false)
                 .build()
