@@ -7,7 +7,22 @@
     <string name="mood_low">Low</string>
     <string name="mood_rough">Rough</string>
 
-    <string name="how_feeling">How are you feeling right now?</string>
+    <!-- Greeting question pool — one selected per day based on date seed -->
+    <string name="greeting_question_1">How are you holding up today?</string>
+    <string name="greeting_question_2">How has today unfolded for you?</string>
+    <string name="greeting_question_3">How did today treat you?</string>
+    <string name="greeting_question_4">What\'s on your mind as the day winds down?</string>
+    <string name="greeting_question_5">How are you feeling as you close out the day?</string>
+    <string name="greeting_question_6">What kind of day has it been?</string>
+    <string name="greeting_question_7">How are you, really?</string>
+    <string name="greeting_question_8">What\'s sitting with you right now?</string>
+    <string name="greeting_question_9">How does today feel, looking back on it?</string>
+    <string name="greeting_question_10">What\'s the weather like inside today?</string>
+    <string name="greeting_question_11">How are you landing at the end of today?</string>
+    <string name="greeting_question_12">What\'s been present for you today?</string>
+    <string name="greeting_question_13">How are you carrying yourself today?</string>
+    <string name="greeting_question_14">Where are you at today?</string>
+    <string name="greeting_question_15">How do you feel today went?</string>
 
     <!-- Greetings -->
     <string name="greeting_morning">Good morning, %1$s</string>

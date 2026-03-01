@@ -42,14 +42,12 @@ abstract class LumenDatabase: RoomDatabase() {
             context: Context,
             passphrase: ByteArray
         ): LumenDatabase {
-            val factory = SupportFactory(passphrase)
 
             return Room.databaseBuilder(
                 context.applicationContext,
                 LumenDatabase::class.java,
                 CoreDataConstants.DATABASE_NAME
             )
-                .openHelperFactory(factory)
                 .addMigrations(*Migrations.ALL)
                 .fallbackToDestructiveMigrationOnDowngrade(false)
                 .build()
