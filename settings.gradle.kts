@@ -24,7 +24,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "Lumen"
 include(":app")
-include(":today")
+include(":checkin")
 include(":timeline")
 include(":insights")
 include(":core-data")

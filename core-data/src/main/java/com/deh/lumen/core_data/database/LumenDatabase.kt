@@ -4,7 +4,13 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.deh.lumen.core_data.CoreDataConstants
+import com.deh.lumen.core_data.converters.FocusAreaConverter
+import com.deh.lumen.core_data.converters.LocalDateConverter
+import com.deh.lumen.core_data.converters.LocalDateTimeConverter
+import com.deh.lumen.core_data.converters.LocalTimeConverter
+import com.deh.lumen.core_data.converters.UserIntentionConverter
 import com.deh.lumen.core_data.dao.CheckInDao
 import com.deh.lumen.core_data.dao.UserDao
 import com.deh.lumen.core_data.entity.CheckInEntity
@@ -17,6 +23,13 @@ import com.deh.lumen.core_data.entity.UserEntity
     ],
     version = CoreDataConstants.DATABASE_VERSION,
     exportSchema = true
+)
+@TypeConverters(
+    FocusAreaConverter::class,
+    UserIntentionConverter::class,
+    LocalTimeConverter::class,
+    LocalDateConverter::class,
+    LocalDateTimeConverter::class
 )
 abstract class LumenDatabase: RoomDatabase() {
     abstract fun userDao(): UserDao
