@@ -3,7 +3,7 @@ package com.deh.lumen.onboarding
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 
-sealed class ScreenAttributes(
+sealed class OnboardingStep(
     @DrawableRes val logo: Int?,
     @StringRes val titleRes: Int,
     @StringRes val supertitleRes: Int?,
@@ -18,7 +18,7 @@ sealed class ScreenAttributes(
         val description: Int? = R.string.step_one_description,
         val firstButtonText: Int = R.string.button_get_started,
         val secondButtonText: Int? = R.string.button_have_account
-    ) : ScreenAttributes(
+    ) : OnboardingStep(
         logo = appLogo,
         titleRes = screenTitle,
         supertitleRes = supertitle,
@@ -34,7 +34,7 @@ sealed class ScreenAttributes(
         val description: Int? = R.string.step_two_description,
         val firstButtonText: Int = R.string.button_continue,
         val secondButtonText: Int? = null
-    ) : ScreenAttributes(
+    ) : OnboardingStep(
         logo = appLogo,
         titleRes = screenTitle,
         supertitleRes = supertitle,
@@ -50,7 +50,7 @@ sealed class ScreenAttributes(
         val description: Int? = null,
         val firstButtonText: Int = R.string.button_continue,
         val secondButtonText: Int? = null
-    ) : ScreenAttributes(
+    ) : OnboardingStep(
         logo = appLogo,
         titleRes = screenTitle,
         supertitleRes = supertitle,
@@ -66,7 +66,7 @@ sealed class ScreenAttributes(
         val description: Int? = R.string.step_four_description,
         val firstButtonText: Int = R.string.button_continue,
         val secondButtonText: Int? = null
-    ) : ScreenAttributes(
+    ) : OnboardingStep(
         logo = appLogo,
         titleRes = screenTitle,
         supertitleRes = supertitle,
@@ -82,7 +82,7 @@ sealed class ScreenAttributes(
         val description: Int? = R.string.step_five_description,
         val firstButtonText: Int = R.string.button_continue,
         val secondButtonText: Int? = null
-    ) : ScreenAttributes(
+    ) : OnboardingStep(
         logo = appLogo,
         titleRes = screenTitle,
         supertitleRes = supertitle,
@@ -96,9 +96,9 @@ sealed class ScreenAttributes(
         val screenTitle: Int = R.string.step_six_title,
         val supertitle: Int? = R.string.step_six_supertitle,
         val description: Int? = null,
-        val firstButtonText: Int = R.string.button_understand,
+        val firstButtonText: Int = R.string.button_sounds_good,
         val secondButtonText: Int? = null
-    ) : ScreenAttributes(
+    ) : OnboardingStep(
         logo = appLogo,
         titleRes = screenTitle,
         supertitleRes = supertitle,
@@ -114,7 +114,7 @@ sealed class ScreenAttributes(
         val description: Int? = R.string.step_seven_description,
         val firstButtonText: Int = R.string.button_begin_check_in,
         val secondButtonText: Int? = R.string.button_later
-    ) : ScreenAttributes(
+    ) : OnboardingStep(
         logo = appLogo,
         titleRes = screenTitle,
         supertitleRes = supertitle,

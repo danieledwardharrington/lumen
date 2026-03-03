@@ -4,7 +4,7 @@
     <string name="step_one_title">A quiet moment, just for you.</string>
     <string name="step_two_title">What should we call you?</string>
     <string name="step_three_title">What brings you to Lumen?</string>
-    <string name="step_four_title">What matters most in your life right now?</string>
+    <string name="step_four_title">What areas of your life would you like to reflect on?</string>
     <string name="step_five_title">When would you like to check in?</string>
     <string name="step_six_title">Your privacy comes first.</string>
     <string name="step_seven_title">Let\'s do your first check-in together.</string>
@@ -21,14 +21,27 @@
     <string name="step_two_description">Your name is how Lumen will greet you each day.</string>
     <string name="step_four_description">Choose as many as feel right.</string>
     <string name="step_five_description">One check-in per day. A single, intentional moment. You can always this time from the Profile screen.</string>
-    <string name="step_seven_description">It only takes a couple of minutes. This first check-in will help us understand your starting point.</string>
+    <string name="step_seven_description">It only takes a couple of minutes and will give you a meaningful starting point.</string>
 
     <!-- Button text -->
     <string name="button_get_started">Get started</string>
     <string name="button_have_account">I already have an account</string>
     <string name="button_continue">Continue</string>
-    <string name="button_understand">I understand</string>
+    <string name="button_sounds_good">Sounds good</string>
     <string name="button_later">Maybe later</string>
     <string name="button_begin_check_in">Begin check-in</string>
 
+    <!-- Intention strings -->
+    <string name="awareness_title">Self-awareness</string>
+    <string name="awareness_description">I want to understand myself better</string>
+    <string name="track_title">Pattern tracking</string>
+    <string name="track_description">I want to see how my mood and habits connect over time</string>
+    <string name="reflection_title">Daily reflection</string>
+    <string name="reflection_description">I want a consistent moment to pause and check in</string>
+    <string name="therapy_title">Therapy support</string>
+    <string name="therapy_description">I\'m working with a therapist and want to supplement my therapy</string>
+
+    <!-- Misc -->
+    <string name="logo_content_description">Lumen logo</string>
+    <string name="name_input_hint">Enter your name</string>
 </resources>
