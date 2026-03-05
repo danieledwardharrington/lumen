@@ -41,6 +41,17 @@
     <string name="therapy_title">Therapy support</string>
     <string name="therapy_description">I want to supplement my therapy journey</string>
 
+    <!-- Focus areas -->
+    <string name="focus_work">Work</string>
+    <string name="focus_family">Family</string>
+    <string name="focus_relationships">Relationships</string>
+    <string name="focus_health">Health</string>
+    <string name="focus_finances">Finances</string>
+    <string name="focus_growth">Growth</string>
+    <string name="focus_sleep">Sleep</string>
+    <string name="focus_social">Social</string>
+
+
     <!-- Misc -->
     <string name="logo_content_description">Lumen logo</string>
     <string name="name_input_hint">Enter your name</string>

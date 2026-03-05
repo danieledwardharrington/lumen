@@ -1,8 +1,7 @@
-package com.deh.lumen.onboarding.ui
+package com.deh.lumen.onboarding.ui.steps
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.runtime.Composable
@@ -40,6 +39,6 @@ fun NameInput(
             unfocusedBorderColor = LumenTheme.colors.outline
         ),
         singleLine = true,
-        shape = RoundedCornerShape(14.dp)
+        shape = LumenTheme.shapes.small
     )
 }

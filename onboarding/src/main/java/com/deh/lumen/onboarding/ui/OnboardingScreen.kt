@@ -17,8 +17,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.deh.lumen.core_ui.composables.LumenButton
 import com.deh.lumen.core_ui.theme.LumenTheme
-import com.deh.lumen.onboarding.OnboardingStep
+import com.deh.lumen.onboarding.models.OnboardingStep
 import com.deh.lumen.onboarding.R
+import com.deh.lumen.onboarding.ui.steps.IntentList
+import com.deh.lumen.onboarding.ui.steps.NameInput
 
 @Composable
 fun OnboardingScreen(
@@ -67,8 +69,13 @@ fun OnboardingScreen(
 
         when (onboardingStep) {
             is OnboardingStep.Name -> NameInput(
-                onNameChange = {}
+                onNameChange = { }
             )
+            is OnboardingStep.Intent -> IntentList(
+                onIntentClicked = { },
+                intents = listOf() // TODO: Pass list of intents
+            )
+
             else -> {}
         }
 
