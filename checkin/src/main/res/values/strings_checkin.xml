@@ -30,4 +30,6 @@
     <string name="greeting_evening">Good evening, %1$s</string>
 
     <string name="complete_check_in">Complete Check-In</string>
+
+    <string name="mood_selection">Tap the one that feels closest</string>
 </resources>

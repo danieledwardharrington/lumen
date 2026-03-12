@@ -1,6 +1,10 @@
 package com.deh.lumen.checkin.models
 
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ReadOnlyComposable
+import androidx.compose.ui.graphics.Color
 import com.deh.lumen.checkin.R
+import com.deh.lumen.core_ui.theme.LumenTheme
 
 enum class Mood(
     val moodNameRes: Int,
@@ -9,6 +13,7 @@ enum class Mood(
     ROUGH(
         moodNameRes = R.string.mood_rough,
         moodEmoji = "\u26C8\uFE0F"
+
     ),
     LOW(
         moodNameRes = R.string.mood_low,
@@ -25,5 +30,16 @@ enum class Mood(
     GREAT(
         moodNameRes = R.string.mood_great,
         moodEmoji = "\u2600\uFE0F"
-    )
+    );
+
+    val moodColor: Color
+        @Composable
+        @ReadOnlyComposable
+        get() = when (this) {
+            ROUGH -> LumenTheme.extendedColors.moodStrugglingSubtle
+            LOW -> LumenTheme.extendedColors.moodLowSubtle
+            OKAY -> LumenTheme.extendedColors.moodOkaySubtle
+            GOOD -> LumenTheme.extendedColors.moodGoodSubtle
+            GREAT -> LumenTheme.extendedColors.moodGreatSubtle
+        }
 }
