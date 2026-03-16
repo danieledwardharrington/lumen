@@ -5,6 +5,7 @@ import com.deh.lumen.core_data.QuestionAnswerPair
 import com.deh.lumen.core_data.dao.CheckInDao
 import com.deh.lumen.core_data.entity.CheckInEntity
 import com.deh.lumen.core_data.entity.enum.SafetyFlag
+import com.deh.lumen.core_data.models.SafetyStatus
 import kotlinx.coroutines.flow.Flow
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.TimeZone
@@ -67,11 +68,11 @@ class CheckInRepository @Inject constructor(
 
     suspend fun updateSafetyFlag(
         id: String,
-        flag: SafetyFlag
+        status: SafetyStatus
     ) {
         val existing = checkInDao.getCheckInById(id)
             ?: error("Cannot update safety flag — check-in $id not found")
-        checkInDao.updateCheckIn(existing.copy(safetyFlag = flag))
+        checkInDao.updateCheckIn(existing.copy(safetyConfidence = status.confidence))
     }
 
     suspend fun saveEditedAnswers(

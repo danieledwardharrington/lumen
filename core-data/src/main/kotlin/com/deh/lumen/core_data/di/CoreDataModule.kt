@@ -2,6 +2,7 @@ package com.deh.lumen.core_data.di
 
 import android.content.Context
 import androidx.room.Room
+import com.deh.lumen.core_data.CoreDataConstants
 import com.deh.lumen.core_data.CoreDataConstants.DATABASE_NAME
 import com.deh.lumen.core_data.dao.CheckInDao
 import com.deh.lumen.core_data.dao.UserDao
@@ -9,7 +10,13 @@ import com.deh.lumen.core_data.database.LumenDatabase
 import com.deh.lumen.core_data.repository.CheckInRepository
 import com.deh.lumen.core_data.repository.UserRepository
 import com.deh.lumen.core_data.security.PassphraseManager
+import com.google.firebase.Firebase
 import com.google.firebase.ai.FirebaseAI
+import com.google.firebase.ai.GenerativeModel
+import com.google.firebase.ai.ai
+import com.google.firebase.ai.type.GenerativeBackend
+import com.google.firebase.ai.type.content
+import com.google.firebase.ai.type.generationConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -70,5 +77,15 @@ object CoreDataModule {
 
     @Provides
     @Singleton
-    fun provideFirebaseAi(): FirebaseAI = FirebaseAI.
+    fun provideFirebaseModel(): GenerativeModel = Firebase
+        .ai(backend = GenerativeBackend.googleAI())
+        .generativeModel(
+            modelName = CoreDataConstants.AI_MODEL,
+            generationConfig = generationConfig {
+                temperature = 0.7f
+            },
+            systemInstruction = content {
+                text(CoreDataConstants.AI_INSTRUCTIONS)
+            }
+        )
 }

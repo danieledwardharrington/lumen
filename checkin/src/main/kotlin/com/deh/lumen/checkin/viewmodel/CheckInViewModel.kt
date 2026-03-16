@@ -7,6 +7,7 @@ import com.deh.lumen.checkin.models.MoodUI
 import com.deh.lumen.checkin.usecase.GenerateQuestionsUseCase
 import com.deh.lumen.checkin.usecase.GenerateReflectionUseCase
 import com.deh.lumen.checkin.usecase.HasCheckedInUseCase
+import com.deh.lumen.checkin.usecase.SafetyUseCase
 import com.deh.lumen.checkin.usecase.SaveCheckInUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,6 +15,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -21,7 +23,8 @@ class CheckInViewModel @Inject constructor(
     private val generateQuestionsUseCase: GenerateQuestionsUseCase,
     private val hasCheckedInUseCase: HasCheckedInUseCase,
     private val saveCheckInUseCase: SaveCheckInUseCase,
-    private val generateReflectionUseCase: GenerateReflectionUseCase
+    private val generateReflectionUseCase: GenerateReflectionUseCase,
+    private val safetyUseCase: SafetyUseCase
 ) : ViewModel() {
     private val _checkInState = MutableStateFlow(CheckInState())
     val checkInState: StateFlow<CheckInState> = _checkInState.asStateFlow()
@@ -96,11 +99,29 @@ class CheckInViewModel @Inject constructor(
 
     fun onContinueClicked() {
         viewModelScope.launch {
-            // TODO: Check safety and save check in object
-        }
-    }
+            val result = saveCheckInUseCase(checkInState.value.checkInEntry)
 
-    private fun checkSafety() {
-        // TODO: Evaluate responses for safety information
+            result.fold(
+                onSuccess = { savedEntity ->
+                    launch {
+                        safetyUseCase(
+                            entryId = savedEntity.id,
+                            answers = savedEntity.questionAnswerPairs
+                        ).onSuccess { status ->
+                            if (status.flagged) {
+                                // TODO: Handle surfacing safety info
+                            }
+                        }
+                    }.invokeOnCompletion { throwable ->
+                        if (throwable != null) {
+                            Timber.e("Safety classification failed: $throwable")
+                        }
+                    }
+                },
+                onFailure = { error ->
+                    Timber.e("Error saving user check in: $error")
+                }
+            )
+        }
     }
 }

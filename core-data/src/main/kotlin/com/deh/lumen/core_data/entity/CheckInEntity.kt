@@ -6,8 +6,7 @@ import androidx.room.PrimaryKey
 import com.deh.lumen.core_data.CoreDataConstants
 import com.deh.lumen.core_data.QuestionAnswerPair
 import com.deh.lumen.core_data.entity.enum.MoodLevel
-import com.deh.lumen.core_data.entity.enum.SafetyFlag
-import com.deh.lumen.core_data.models.CheckIn
+import com.deh.lumen.core_data.entity.enum.SafetyConfidence
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 import kotlin.uuid.ExperimentalUuidApi
@@ -29,22 +28,7 @@ data class CheckInEntity(
     val questionAnswerPairs: List<QuestionAnswerPair>,
     val editedAnswerPairs: List<QuestionAnswerPair>? = null,
     val aiReflection: String,
-    val safetyFlag: SafetyFlag? = null,
+    val safetyConfidence: SafetyConfidence? = null,
     val submittedAt: LocalDateTime,
     val editedAt: LocalDateTime? = null
 )
-
-fun CheckInEntity.toCheckIn(): CheckIn {
-    return CheckIn(
-        id = id,
-        date = date,
-        moodScore = moodScore,
-        moodLevel = moodLevel,
-        questionAnswerPairs = questionAnswerPairs,
-        editedAnswerPairs = editedAnswerPairs,
-        aiReflection = aiReflection,
-        safetyFlag = safetyFlag,
-        submittedAt = submittedAt,
-        editedAt = editedAt
-    )
-}

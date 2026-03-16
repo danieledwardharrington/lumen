@@ -57,4 +57,6 @@ dependencies {
     implementation(libs.androidx.security.crypto)
 
     implementation(libs.bundles.firebase)
+
+    implementation(libs.timber)
 }

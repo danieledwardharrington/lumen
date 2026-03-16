@@ -7,5 +7,6 @@ data class CheckInEntry(
     val selectedMoodUI: MoodUI?,
     val moodLevel: MoodLevel? = selectedMoodUI?.toMoodLevel(),
     val questionsAnswers: List<QuestionAnswerPair>,
+    val editedQuestionsAnswers: List<QuestionAnswerPair>? = null,
     val aiReflection: String?
 )

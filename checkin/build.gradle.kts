@@ -54,4 +54,8 @@ dependencies {
     implementation(libs.bundles.compose)
     implementation(project(":core-ui"))
     implementation(project(":core-data"))
+
+    implementation(libs.timber)
+    implementation(libs.bundles.firebase)
+    implementation(libs.kotlinx.serialization)
 }
