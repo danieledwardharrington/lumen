@@ -2,7 +2,7 @@ package com.deh.lumen.checkin.usecase
 
 import com.deh.lumen.core_data.entity.enum.SafetyConfidence
 import com.deh.lumen.core_data.models.SafetyStatus
-import com.deh.lumen.core_data.QuestionAnswerPair
+import com.deh.lumen.core_data.models.QuestionAnswerPair
 import com.deh.lumen.core_data.repository.CheckInRepository
 import com.google.firebase.ai.GenerativeModel
 import kotlinx.serialization.json.Json

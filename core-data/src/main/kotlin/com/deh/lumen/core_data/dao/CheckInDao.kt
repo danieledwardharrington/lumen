@@ -37,6 +37,9 @@ interface CheckInDao {
     @Query("SELECT COUNT(*) FROM ${CoreDataConstants.CHECK_IN_TABLE_NAME}")
     fun observeTotalCount(): Flow<Int>
 
+    @Query("SELECT AVG(moodScore) FROM ${CoreDataConstants.CHECK_IN_TABLE_NAME}")
+    fun observeAverageMoodScore(): Flow<Float?>
+
     @Query("SELECT date FROM ${CoreDataConstants.CHECK_IN_TABLE_NAME} ORDER BY date DESC LIMIT 1")
     suspend fun getMostRecentDate(): LocalDate?
 

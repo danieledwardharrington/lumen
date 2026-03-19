@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.deh.lumen.core_data.CoreDataConstants
-import com.deh.lumen.core_data.QuestionAnswerPair
+import com.deh.lumen.core_data.models.QuestionAnswerPair
 import com.deh.lumen.core_data.entity.enum.MoodLevel
 import com.deh.lumen.core_data.entity.enum.SafetyConfidence
 import kotlinx.datetime.LocalDate

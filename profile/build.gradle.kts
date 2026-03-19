@@ -49,6 +49,9 @@ dependencies {
     implementation(libs.bundles.compose)
     implementation(libs.timber)
     implementation(libs.bundles.billing)
+    implementation(libs.bundles.hilt)
+    implementation(libs.kotlin.datetime)
+    implementation(libs.bundles.room)
     implementation(project(":core-ui"))
     implementation(project(":core-data"))
 }

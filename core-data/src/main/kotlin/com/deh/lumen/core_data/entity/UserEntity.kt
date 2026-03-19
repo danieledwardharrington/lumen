@@ -5,7 +5,8 @@ import androidx.room.PrimaryKey
 import com.deh.lumen.core_data.CoreDataConstants
 import com.deh.lumen.core_data.entity.enum.FocusArea
 import com.deh.lumen.core_data.entity.enum.UserIntention
-import com.deh.lumen.core_data.models.User
+import com.deh.lumen.core_data.models.UserProfile
+import com.deh.lumen.core_data.models.toInsightDay
 import kotlinx.datetime.DayOfWeek
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.LocalTime
@@ -30,22 +31,25 @@ data class UserEntity(
     val patternDetectionEnabled: Boolean = true,
     val weeklyInsightDay: DayOfWeek = DayOfWeek.SUNDAY,
     val createdAt: LocalDateTime = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()),
-    val privacyAcknowledgedAt: LocalDateTime? = null
+    val privacyAcknowledgedAt: LocalDateTime? = null,
+    val currentStreak: Int = 0,
+    val bestStreak: Int = 0
 )
 
-fun UserEntity.toUser(): User {
-    return User(
-        id = id,
-        displayName = displayName,
-        intention = intention,
-        focusAreas = focusAreas,
-        reminderTime = reminderTime,
-        cloudBackupEnabled = cloudBackupEnabled,
-        biometricsEnabled = biometricsEnabled,
-        wellbeingMonitoringEnabled = wellbeingMonitoringEnabled,
-        patternDetectionEnabled = patternDetectionEnabled,
-        weeklyInsightDay = weeklyInsightDay,
-        createdAt = createdAt,
-        privacyAcknowledgedAt = privacyAcknowledgedAt
+fun UserEntity.toUser(): UserProfile {
+    return UserProfile(
+        displayName = this.displayName,
+        focusAreas = this.focusAreas,
+        reminderTime = this.reminderTime,
+        cloudEnabled = this.cloudBackupEnabled,
+        appLockEnabled = this.biometricsEnabled,
+        monitoringEnabled = this.wellbeingMonitoringEnabled,
+        insightDay = this.weeklyInsightDay.toInsightDay(),
+        memberSince = this.createdAt.date,
+        totalCheckInCount = 0,
+        currentStreak = this.currentStreak,
+        bestStreak = this.bestStreak,
+        averageMoodScore = 0.0f,
+        notificationsEnabled = false
     )
 }

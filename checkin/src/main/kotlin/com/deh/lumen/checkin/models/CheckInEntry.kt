@@ -1,6 +1,6 @@
 package com.deh.lumen.checkin.models
 
-import com.deh.lumen.core_data.QuestionAnswerPair
+import com.deh.lumen.core_data.models.QuestionAnswerPair
 import com.deh.lumen.core_data.entity.enum.MoodLevel
 import com.deh.lumen.core_data.models.SafetyStatus
 

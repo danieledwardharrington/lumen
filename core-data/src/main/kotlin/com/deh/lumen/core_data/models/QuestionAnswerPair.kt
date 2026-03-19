@@ -1,4 +1,4 @@
-package com.deh.lumen.core_data
+package com.deh.lumen.core_data.models
 
 import kotlinx.serialization.Serializable
 
@@ -7,5 +7,3 @@ data class QuestionAnswerPair(
     val question: String,
     val answer: String
 )
-
-

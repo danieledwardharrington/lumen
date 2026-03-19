@@ -1,7 +1,7 @@
 package com.deh.lumen.core_data.repository
 
 import android.database.sqlite.SQLiteConstraintException
-import com.deh.lumen.core_data.QuestionAnswerPair
+import com.deh.lumen.core_data.models.QuestionAnswerPair
 import com.deh.lumen.core_data.dao.CheckInDao
 import com.deh.lumen.core_data.entity.CheckInEntity
 import com.deh.lumen.core_data.models.SafetyStatus

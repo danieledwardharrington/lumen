@@ -1,6 +1,6 @@
 package com.deh.lumen.checkin.usecase
 
-import com.deh.lumen.core_data.QuestionAnswerPair
+import com.deh.lumen.core_data.models.QuestionAnswerPair
 import com.deh.lumen.core_data.entity.enum.MoodLevel
 import com.google.firebase.ai.GenerativeModel
 import javax.inject.Inject
