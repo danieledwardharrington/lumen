@@ -30,6 +30,9 @@ class CheckInRepository @Inject constructor(
     suspend fun getCheckInForDate(date: LocalDate): CheckInEntity? =
         checkInDao.getCheckInForDate(date)
 
+    fun observeAverageMoodScore(): Flow<Float?> =
+        checkInDao.observeAverageMoodScore()
+
     suspend fun getCheckInsForRange(
         from: LocalDate,
         to: LocalDate

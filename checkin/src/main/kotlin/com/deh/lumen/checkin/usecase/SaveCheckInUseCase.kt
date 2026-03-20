@@ -3,6 +3,8 @@ package com.deh.lumen.checkin.usecase
 import com.deh.lumen.checkin.models.CheckInEntry
 import com.deh.lumen.core_data.entity.CheckInEntity
 import com.deh.lumen.core_data.repository.CheckInRepository
+import com.deh.lumen.core_data.repository.UserRepository
+import kotlinx.datetime.LocalDate
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import timber.log.Timber
@@ -12,7 +14,8 @@ import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 
 class SaveCheckInUseCase @Inject constructor(
-    private val checkInRepository: CheckInRepository
+    private val checkInRepository: CheckInRepository,
+    private val userRepository: UserRepository
 ) {
     @OptIn(ExperimentalUuidApi::class)
     suspend operator fun invoke(entry: CheckInEntry): Result<CheckInEntity> {
@@ -50,6 +53,36 @@ class SaveCheckInUseCase @Inject constructor(
                     .now()
                     .toLocalDateTime(TimeZone.currentSystemDefault())
             )
-        )
+        ).onSuccess { updateStreak() }
+    }
+
+    private suspend fun updateStreak() {
+        val user = userRepository.getUser()
+        if (user != null) {
+            val dates = checkInRepository
+                .getAllCheckInsForExport()
+                .map { it.date }
+                .sortedDescending()
+
+            if (dates.isEmpty()) return
+
+            var streak = 1
+            for (i in dates.indices) {
+                val diff = dates[i].toEpochDays() - dates[i + 1].toEpochDays()
+                if (diff == 1L) streak++ else break
+            }
+
+            val today = Clock.System.now()
+            val activeStreak = if (dates.first() == today) streak else 0
+
+            val newBest = maxOf(user.bestStreak, activeStreak)
+
+            userRepository.updateUser {
+                copy(
+                    currentStreak = activeStreak,
+                    bestStreak = newBest
+                )
+            }
+        }
     }
 }

@@ -27,9 +27,10 @@ object CheckInModule {
     @Provides
     @ViewModelScoped
     fun provideSaveCheckInUseCase(
-        checkInRepository: CheckInRepository
+        checkInRepository: CheckInRepository,
+        userRepository: UserRepository
     ): SaveCheckInUseCase =
-        SaveCheckInUseCase(checkInRepository)
+        SaveCheckInUseCase(checkInRepository, userRepository)
 
     @Provides
     @ViewModelScoped

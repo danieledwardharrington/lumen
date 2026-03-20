@@ -36,7 +36,7 @@ data class UserEntity(
     val bestStreak: Int = 0
 )
 
-fun UserEntity.toUser(): UserProfile {
+fun UserEntity.toUserProfile(): UserProfile {
     return UserProfile(
         displayName = this.displayName,
         focusAreas = this.focusAreas,
