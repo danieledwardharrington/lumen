@@ -1,0 +1,225 @@
+package com.deh.lumen.profile.ui
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.room.ext.capitalize
+import com.deh.lumen.core_data.entity.enum.FocusArea
+import com.deh.lumen.core_data.models.InsightDay
+import com.deh.lumen.core_data.models.UserProfile
+import com.deh.lumen.core_ui.theme.LumenTheme
+import com.deh.lumen.profile.R
+import com.deh.lumen.profile.models.ProfileState
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
+import java.util.Locale
+import kotlin.time.Clock
+
+@Composable
+fun ProfileContent(
+    modifier: Modifier = Modifier,
+    profileState: ProfileState.Ready
+) {
+    LazyColumn(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(16.dp)
+            .background(color = LumenTheme.colors.surface),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(32.dp)
+    ) {
+        item(key = "Header") {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                horizontalAlignment = Alignment.Start,
+                verticalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                Text(
+                    text = stringResource(R.string.profile),
+                    style = LumenTheme.typography.headlineMedium,
+                    color = LumenTheme.colors.onSurface
+                )
+
+                Text(
+                    text = stringResource(R.string.account_and_preferences),
+                    style = LumenTheme.typography.bodySmall,
+                    color = LumenTheme.colors.onSurfaceVariant
+                )
+            }
+        }
+
+        item(key = "Profile Info") {
+            ProfileInfoCard(
+                startComposable = {
+                    UserAvatar(
+                        firstInitial = profileState.userProfile.displayName.first()
+                    )
+                },
+                middleComposable = {
+                    Column(
+                        horizontalAlignment = Alignment.Start,
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        Text(
+                            text = profileState.userProfile.displayName,
+                            style = LumenTheme.typography.titleLarge.copy(
+                                fontStyle = FontStyle.Normal,
+                                fontSize = 14.sp,
+                                lineHeight = 20.sp
+                            ),
+                            color = LumenTheme.colors.onSurface
+                        )
+
+                        Text(
+                            text = stringResource(
+                                R.string.member_since,
+                                "${profileState.userProfile.memberSince.month.name.lowercase().capitalize(
+                                    Locale.ROOT)} ${profileState.userProfile.memberSince.year}"
+                            ),
+                            style = LumenTheme.typography.bodySmall,
+                            color = LumenTheme.colors.onSurfaceVariant
+                        )
+                    }
+                },
+                endComposable =  {
+                    IconButton(
+                        onClick = {
+                            // TODO: Edit user name
+                        },
+                        shape = CircleShape
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .size(32.dp)
+                                .background(LumenTheme.colors.onPrimary.copy(alpha = 0.05f))
+                                .clip(CircleShape)
+                                .border(width = 1.dp, color = LumenTheme.colors.onPrimary.copy(alpha = 0.07f))
+                        ) {
+                            Icon(
+                                modifier = Modifier.align(Alignment.Center),
+                                painter = painterResource(R.drawable.ic_edit),
+                                contentDescription = "Edit name",
+                                tint = LumenTheme.colors.onSurfaceVariant
+                            )
+                        }
+                    }
+                }
+            )
+        }
+
+        item(key = "Streak") {
+            ProfileInfoCard(
+                startComposable = {
+                    Icon(
+                        painter = painterResource(R.drawable.ic_flame),
+                        contentDescription = "Current streak",
+                        tint = if (profileState.userProfile.currentStreak > 0) {
+                            LumenTheme.colors.tertiary
+                        } else {
+                            LumenTheme.colors.onSurfaceVariant.copy(alpha = 0.4f)
+                        }
+                    )
+                },
+                middleComposable = {
+                    Column(
+                        horizontalAlignment = Alignment.Start,
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        Text(
+                            text = profileState.userProfile.currentStreak.toString(),
+                            style = LumenTheme.typography.headlineSmall.copy(fontStyle = FontStyle.Normal),
+                            color = if (profileState.userProfile.currentStreak > 0) {
+                                LumenTheme.colors.tertiary
+                            } else {
+                                LumenTheme.colors.onSurfaceVariant.copy(alpha = 0.4f)
+                            }
+                        )
+
+                        Text(
+                            text = stringResource(R.string.days_in_a_row),
+                            style = LumenTheme.typography.bodySmall,
+                            color = LumenTheme.colors.onSurfaceVariant
+                        )
+                    }
+                },
+                endComposable =  {
+                    Column(
+                        horizontalAlignment = Alignment.Start,
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        Text(
+                            text = profileState.userProfile.bestStreak.toString(),
+                            style = LumenTheme.typography.titleSmall,
+                            color = LumenTheme.colors.onSurface
+                        )
+
+                        Text(
+                            text = stringResource(R.string.personal_best).uppercase(),
+                            style = LumenTheme.typography.bodySmall.copy(fontWeight = FontWeight.Medium),
+                            color = LumenTheme.colors.onSurfaceVariant
+                        )
+                    }
+                }
+            )
+        }
+    }
+}
+
+@Composable
+@Preview
+private fun PreviewProfileContent() {
+    LumenTheme {
+        Column(
+            modifier = Modifier.fillMaxSize()
+                .background(color = LumenTheme.colors.surface)
+        ) {
+            ProfileContent(
+                profileState = fakeProfileState()
+            )
+        }
+    }
+}
+
+private fun fakeProfileState(): ProfileState.Ready {
+    return ProfileState.Ready(
+        userProfile = UserProfile(
+            displayName = "Daniel",
+            currentStreak = 31,
+            bestStreak = 44,
+            memberSince = LocalDate(2026, 1, 1),
+            reminderTime = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).time,
+            focusAreas = listOf(FocusArea.CREATIVITY, FocusArea.FINANCES, FocusArea.FAMILY),
+            notificationsEnabled = true,
+            appLockEnabled = false,
+            cloudEnabled = false,
+            monitoringEnabled = true,
+            insightDay = InsightDay.SUNDAY,
+            totalCheckInCount = 109,
+            averageMoodScore = 3.8f
+        )
+    )
+}
