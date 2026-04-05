@@ -31,9 +31,11 @@ import com.deh.lumen.core_data.entity.enum.FocusArea
 import com.deh.lumen.core_data.format
 import com.deh.lumen.core_data.models.InsightDay
 import com.deh.lumen.core_data.models.UserProfile
+import com.deh.lumen.core_ui.composables.LumenSwitch
 import com.deh.lumen.core_ui.composables.ThreeCardRow
 import com.deh.lumen.core_ui.theme.LumenTheme
 import com.deh.lumen.profile.R
+import com.deh.lumen.profile.models.ProfileItem
 import com.deh.lumen.profile.models.ProfileState
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.TimeZone
@@ -45,7 +47,8 @@ import kotlin.time.Clock
 @Composable
 fun ProfileContent(
     modifier: Modifier = Modifier,
-    profileState: ProfileState.Ready
+    profileState: ProfileState.Ready,
+    onCheckChange: (Boolean, Int) -> Unit
 ) {
     LazyColumn(
         modifier = modifier
@@ -141,6 +144,16 @@ fun ProfileContent(
 
         item(key = "All Time") {
             AllTimeColumn(profileState = profileState)
+        }
+
+        item(key = "Check-In Section") {
+            ProfileSection(
+                sectionTitle = R.string.check_in,
+                profileItems = checkInSectionItems(
+                    profileState = profileState,
+                    onCheckChange = onCheckChange
+                )
+            )
         }
     }
 }
@@ -263,6 +276,57 @@ private fun ColumnTitle(titleRes: Int) {
 }
 
 @Composable
+private fun checkInSectionItems(profileState: ProfileState.Ready, onCheckChange: (Boolean, Int) -> Unit): List<ProfileItem> {
+    return listOf(
+        ProfileItem(
+            iconRes = R.drawable.ic_notifications,
+            iconColor = LumenTheme.colors.secondary,
+            iconBackgroundColor = LumenTheme.colors.secondary.copy(alpha = 0.15f),
+            titleRes = R.string.push_notifications_title,
+            descriptionRes = R.string.push_notifications_description,
+            onClick = { },
+            endAction = {
+                LumenSwitch(
+                    isChecked = profileState.userProfile.notificationsEnabled,
+                    onCheckChange = onCheckChange,
+                    itemTitleRes = R.string.push_notifications_title
+                )
+            }
+        ),
+        ProfileItem(
+            iconRes = R.drawable.ic_app_lock,
+            iconColor = LumenTheme.colors.primary,
+            iconBackgroundColor = LumenTheme.colors.primary.copy(alpha = 0.15f),
+            titleRes = R.string.app_lock_title,
+            descriptionRes = R.string.app_lock_description,
+            onClick = { },
+            endAction = {
+                LumenSwitch(
+                    isChecked = profileState.userProfile.appLockEnabled,
+                    onCheckChange = onCheckChange,
+                    itemTitleRes = R.string.app_lock_title
+                )
+            }
+        ),
+        ProfileItem(
+            iconRes = R.drawable.ic_cloud_backup,
+            iconColor = LumenTheme.colors.onSurfaceVariant,
+            iconBackgroundColor = LumenTheme.colors.onSurfaceVariant.copy(alpha = 0.15f),
+            titleRes = R.string.cloud_backup_title,
+            descriptionRes = R.string.cloud_backup_description,
+            onClick = { },
+            endAction = {
+                LumenSwitch(
+                    isChecked = profileState.userProfile.cloudEnabled,
+                    onCheckChange = onCheckChange,
+                    itemTitleRes = R.string.cloud_backup_title
+                )
+            }
+        )
+    )
+}
+
+@Composable
 @Preview
 private fun PreviewProfileContent() {
     LumenTheme {
@@ -271,7 +335,8 @@ private fun PreviewProfileContent() {
                 .background(color = LumenTheme.colors.surface)
         ) {
             ProfileContent(
-                profileState = fakeProfileState()
+                profileState = fakeProfileState(),
+                onCheckChange = { _, _ -> }
             )
         }
     }

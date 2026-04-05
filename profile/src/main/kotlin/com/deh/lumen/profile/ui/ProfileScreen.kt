@@ -21,7 +21,8 @@ fun ProfileScreen() {
             ProfileEmptyState()
         } else {
             ProfileContent(
-                profileState = profileState.value as ProfileState.Ready
+                profileState = profileState.value as ProfileState.Ready,
+                onCheckChange = viewModel::onCheckChange
             )
         }
     }

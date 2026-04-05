@@ -55,4 +55,8 @@ class ProfileViewModel @Inject constructor(
     ) as MutableStateFlow<ProfileState>
 
     val profileState = _profileState.asStateFlow()
+
+    fun onCheckChange(boolean: Boolean, itemTitleRes: Int) {
+
+    }
 }
