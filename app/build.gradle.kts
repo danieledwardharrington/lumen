@@ -59,4 +59,5 @@ dependencies {
 
     implementation(libs.startup.runtime)
     implementation(libs.bundles.firebase)
+    implementation(libs.bundles.hilt)
 }
