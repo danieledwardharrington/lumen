@@ -44,4 +44,7 @@
 
     <string name="export_as_pdf">Export entries as PDF</string>
     <string name="delete_data">Delete all my data</string>
+
+    <string name="dismiss">Dismiss</string>
+    <string name="confirm">Confirm</string>
 </resources>

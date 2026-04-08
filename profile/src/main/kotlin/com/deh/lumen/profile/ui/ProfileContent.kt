@@ -42,6 +42,7 @@ import com.deh.lumen.profile.R
 import com.deh.lumen.profile.models.ProfileItem
 import com.deh.lumen.profile.models.ProfileState
 import kotlinx.datetime.LocalDate
+import kotlinx.datetime.LocalTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import kotlinx.datetime.todayIn
@@ -53,7 +54,8 @@ fun ProfileContent(
     modifier: Modifier = Modifier,
     profileState: ProfileState.Ready,
     onCheckInItemDialogToggled: () -> Unit,
-    onNotificationItemSwitchChange: (Boolean, Int) -> Unit
+    onNotificationItemSwitchChange: (Boolean, Int) -> Unit,
+    onCheckInTimeConfirmed: (LocalTime) -> Unit
 ) {
     LazyColumn(
         modifier = modifier
@@ -152,11 +154,11 @@ fun ProfileContent(
         }
 
         item(key = "Check-in Section") {
-            LumenDialog(
-                onDismissClick = onCheckInItemDialogToggled
-            ) {
-                CheckInTimePicker(
-
+            if (profileState.showDialog) {
+                TimePickerDialog(
+                    checkInTime = profileState.userProfile.reminderTime,
+                    onDismissRequest = onCheckInItemDialogToggled,
+                    onConfirmTime = onCheckInTimeConfirmed
                 )
             }
             ProfileSection(
@@ -418,7 +420,8 @@ private fun PreviewProfileContent() {
             ProfileContent(
                 profileState = fakeProfileState(),
                 onNotificationItemSwitchChange = { _, _ -> },
-                onCheckInItemDialogToggled = {}
+                onCheckInItemDialogToggled = {},
+                onCheckInTimeConfirmed = {}
             )
         }
     }
