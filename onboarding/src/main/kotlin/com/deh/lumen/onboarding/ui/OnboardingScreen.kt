@@ -122,7 +122,7 @@ fun OnboardingScreen(
                     Text(
                         text = stringResource(it!!),
                         textAlign = TextAlign.Center,
-                        style = LumenTheme.typography.bodyMedium,
+                        style = LumenTheme.typography.bodyLarge,
                         color = LumenTheme.colors.onSurfaceVariant
                     )
                 }
