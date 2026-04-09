@@ -43,6 +43,8 @@ securityCrypto = "1.1.0"
 
 startupRuntime = "1.2.0"
 
+ksp = "2.3.6"
+
 [libraries]
 billing = { module = "com.android.billingclient:billing", version.ref = "billing" }
 billing-ktx = { module = "com.android.billingclient:billing-ktx", version.ref = "billing" }
@@ -119,7 +121,6 @@ coroutines = [
     "coroutines-core"
 ]
 room = [
-    "room-compiler",
     "room-runtime",
     "room-ktx"
 ]
@@ -130,7 +131,6 @@ firebase = [
 ]
 hilt = [
     "hilt",
-    "hilt-compiler",
     "hilt-compose-navigation"
 ]
 sqlcipher = [
@@ -146,3 +146,4 @@ android-library = { id = "com.android.library", version.ref = "agp" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 google-services = { id = "com.google.gms.google-services", version.ref = "google-services" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp"  }

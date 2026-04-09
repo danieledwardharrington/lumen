@@ -26,15 +26,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.room.ext.capitalize
 import com.deh.lumen.core_data.entity.enum.FocusArea
 import com.deh.lumen.core_data.entity.enum.UserIntention
 import com.deh.lumen.core_data.format
 import com.deh.lumen.core_data.models.InsightDay
 import com.deh.lumen.core_data.models.UserProfile
-import com.deh.lumen.core_ui.composables.CheckInTimePicker
 import com.deh.lumen.core_ui.composables.LumenChevronButton
-import com.deh.lumen.core_ui.composables.LumenDialog
 import com.deh.lumen.core_ui.composables.LumenSwitch
 import com.deh.lumen.core_ui.composables.ThreeCardRow
 import com.deh.lumen.core_ui.theme.LumenTheme

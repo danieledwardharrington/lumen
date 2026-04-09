@@ -6,6 +6,8 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
 }
 
 kotlin {
@@ -50,8 +52,10 @@ dependencies {
     implementation(libs.timber)
     implementation(libs.bundles.billing)
     implementation(libs.bundles.hilt)
+    ksp(libs.hilt.compiler)
     implementation(libs.kotlin.datetime)
     implementation(libs.bundles.room)
+    ksp(libs.room.compiler)
     implementation(project(":core-ui"))
     implementation(project(":core-data"))
 }

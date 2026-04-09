@@ -7,6 +7,8 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.google.services)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
 }
 
 kotlin {
@@ -60,4 +62,10 @@ dependencies {
     implementation(libs.startup.runtime)
     implementation(libs.bundles.firebase)
     implementation(libs.bundles.hilt)
+    ksp(libs.hilt.compiler)
+
+
+    implementation(project(":onboarding"))
+    implementation(project(":core-ui"))
+    implementation(project(":core-data"))
 }

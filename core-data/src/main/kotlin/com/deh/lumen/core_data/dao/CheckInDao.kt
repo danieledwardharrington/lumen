@@ -29,7 +29,7 @@ interface CheckInDao {
     @Query("SELECT * FROM ${CoreDataConstants.CHECK_IN_TABLE_NAME} WHERE id = :id LIMIT 1")
     suspend fun getCheckInById(id: String): CheckInEntity?
 
-    @Query("SELECT * FROM ${CoreDataConstants.CHECK_IN_TABLE_NAME} WHERE safetyFlag IS NULL")
+    @Query("SELECT * FROM ${CoreDataConstants.CHECK_IN_TABLE_NAME} WHERE safetyConfidence IS NULL")
     suspend fun getUnclassifiedCheckIns(): List<CheckInEntity>
 
     @Query("SELECT * FROM ${CoreDataConstants.CHECK_IN_TABLE_NAME} WHERE date BETWEEN :from AND :to ORDER BY date ASC")
@@ -44,10 +44,10 @@ interface CheckInDao {
     @Query("""
     SELECT strftime('%Y', date) AS year,
            strftime('%m', date) AS month,
-           AVG(moodScore)       AS avgMood
+           AVG(moodScore)       AS averageMood
     FROM check_in
     GROUP BY year, month
-    ORDER BY avgMood DESC
+    ORDER BY averageMood DESC
     LIMIT 1
 """)
     fun observeBestMonth(): Flow<BestMonth?>

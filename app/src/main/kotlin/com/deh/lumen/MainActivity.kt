@@ -4,6 +4,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import com.deh.lumen.core_ui.theme.LumenTheme
+import com.deh.lumen.onboarding.models.OnboardingStep
+import com.deh.lumen.onboarding.ui.OnboardingScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -12,7 +15,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            // TODO: App UI
+            LumenTheme {
+                OnboardingScreen(OnboardingStep.Welcome())
+            }
         }
     }
 }

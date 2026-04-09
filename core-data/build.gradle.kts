@@ -5,6 +5,8 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
 }
 
 kotlin {
@@ -49,7 +51,9 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     implementation(libs.bundles.room)
+    ksp(libs.room.compiler)
     implementation(libs.bundles.hilt)
+    ksp(libs.hilt.compiler)
     implementation(libs.bundles.coroutines)
 
     implementation(libs.bundles.sqlcipher)

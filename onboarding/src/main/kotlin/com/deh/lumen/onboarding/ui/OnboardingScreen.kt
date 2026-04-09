@@ -5,6 +5,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -72,10 +73,12 @@ fun OnboardingScreen(
             val textAlignment = if (isCenterAligned) TextAlign.Center else TextAlign.Start
 
             if (onboardingStep.logo != null) {
-                AnimatedContent(logoRes) {
+                AnimatedContent(
+                    modifier = Modifier.fillMaxWidth(),
+                    targetState = logoRes,
+                    contentAlignment = Alignment.Center
+                ) {
                     Image(
-                        modifier = Modifier
-                            .align(Alignment.CenterHorizontally),
                         painter = painterResource(it!!),
                         contentDescription = stringResource(R.string.logo_content_description)
                     )
@@ -83,7 +86,11 @@ fun OnboardingScreen(
             }
 
             if (onboardingStep.supertitleRes != null) {
-                AnimatedContent(supertitleText) {
+                AnimatedContent(
+                    modifier = Modifier.fillMaxWidth(),
+                    targetState = supertitleText,
+                    contentAlignment = Alignment.Center
+                ) {
                     Text(
                         text = stringResource(it!!).uppercase(),
                         textAlign = textAlignment,
@@ -93,7 +100,11 @@ fun OnboardingScreen(
                 }
             }
 
-            AnimatedContent(titleText) {
+            AnimatedContent(
+                modifier = Modifier.fillMaxWidth(),
+                targetState = titleText,
+                contentAlignment = Alignment.Center
+            ) {
                 Text(
                     text = stringResource(it),
                     textAlign = textAlignment,
@@ -103,7 +114,11 @@ fun OnboardingScreen(
             }
 
             if (onboardingStep.descriptionRes != null) {
-                AnimatedContent(descriptionText) {
+                AnimatedContent(
+                    modifier = Modifier.fillMaxWidth(),
+                    targetState = descriptionText,
+                    contentAlignment = Alignment.Center
+                ) {
                     Text(
                         text = stringResource(it!!),
                         textAlign = TextAlign.Center,

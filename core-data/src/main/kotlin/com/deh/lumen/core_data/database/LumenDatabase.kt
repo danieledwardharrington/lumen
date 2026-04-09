@@ -10,6 +10,7 @@ import com.deh.lumen.core_data.converters.FocusAreaConverter
 import com.deh.lumen.core_data.converters.LocalDateConverter
 import com.deh.lumen.core_data.converters.LocalDateTimeConverter
 import com.deh.lumen.core_data.converters.LocalTimeConverter
+import com.deh.lumen.core_data.converters.QuestionAnswerPairConverter
 import com.deh.lumen.core_data.converters.UserIntentionConverter
 import com.deh.lumen.core_data.dao.CheckInDao
 import com.deh.lumen.core_data.dao.UserDao
@@ -30,7 +31,8 @@ import net.zetetic.database.sqlcipher.SupportOpenHelperFactory
     UserIntentionConverter::class,
     LocalTimeConverter::class,
     LocalDateConverter::class,
-    LocalDateTimeConverter::class
+    LocalDateTimeConverter::class,
+    QuestionAnswerPairConverter::class
 )
 abstract class LumenDatabase: RoomDatabase() {
     abstract fun userDao(): UserDao
